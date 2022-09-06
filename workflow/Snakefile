@@ -73,7 +73,7 @@ def get_bwa_index(wildcards):
 rule all:
     input:
         expand(
-            "results/individual_calls/{joint_calling_group}.vcf.gz",
+            "results/merged_calls/{joint_calling_group}.filter.vcf.gz",
             joint_calling_group=joint_calling_group_lists.index,
         ),
 
