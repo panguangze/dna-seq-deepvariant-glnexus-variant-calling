@@ -7,6 +7,10 @@ import numpy as np
 import os
 min_version("6.5")
 
+##### load config and sample sheets #####
+
+
+configfile: "config/config.yaml"
 
 report: "report/workflow.rst"
 
@@ -26,16 +30,6 @@ validate(joint_calling_groups, schema="schemas/joint_calling_groups.schema.yaml"
 # List of samples for each joint calling group
 joint_calling_group_lists = joint_calling_groups.groupby("group").sample_id.apply(set)
 
-
-from snakemake.utils import validate
-import pandas as pd
-import numpy as np
-import os
-
-##### load config and sample sheets #####
-
-
-configfile: "config/config.yaml"
 
 ## Helper functions
 
