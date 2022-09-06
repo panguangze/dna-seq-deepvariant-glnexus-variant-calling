@@ -8,22 +8,6 @@ import os
 
 configfile: "config/config.yaml"
 
-
-validate(config, schema="../schemas/config.schema.yaml")
-
-samples = pd.read_table(config["samples"], dtype=str).set_index(
-    ["sample_id", "unit"], drop=False
-)
-samples.index = samples.index.set_levels(
-    [i.astype(str) for i in samples.index.levels]
-)  # enforce str in index
-validate(samples, schema="../schemas/samples.schema.yaml")
-
-joint_calling_groups = pd.read_csv(config["joint_calling_groups"], sep="\t")
-validate(joint_calling_groups, schema="../schemas/joint_calling_groups.schema.yaml")
-# List of samples for each joint calling group
-joint_calling_group_lists = joint_calling_groups.groupby("group").sample_id.apply(set)
-
 ## Helper functions
 
 
